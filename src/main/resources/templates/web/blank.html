@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--main-fragment (title, otherStaticResources, headerMainNav, mainContent, otherJSSources)-->
+<html lang="es"
+      th:replace="~{layouts/web/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #index-static-resources},
+                                                ~{:: #index-header-main-nav},
+                                                ~{:: #index-main-content},
+                                                ~{:: #index-js-resources}
+                                               )}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Molla-Furniture Store</title>
+</head>
+
+<body>
+<div id="index-header-main-nav">
+    <nav class="main-nav">
+        <ul class="menu sf-arrows">
+            <li class="active">
+                <a class="" th:href="@{/}">Home</a>
+            </li>
+            <li>
+                <a class="" href="category-4cols.html">Shop</a>
+            </li>
+            <li>
+                <a class="" href="product.html">Product</a>
+            </li>
+            <li>
+                <a class="" th:href="@{/admin}" th:if="${role == 'ROLE_ADMIN'}">Admin</a>
+            </li>
+        </ul><!-- End .menu -->
+    </nav><!-- End .main-nav -->
+</div>
+<div id="index-main-content">
+<!--   Write page content here-->
+</div>
+
+</body>
+
+</html>
