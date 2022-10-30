@@ -9,9 +9,7 @@ public interface CategoryService {
 
     Category findByCode(String code);
 
-    //    List<Category> findByParentId(Long parentId);
-    List<Category> findCategoriesByCategory_Id(Long categoryId);
-
+    Category findById(Long categoryId);
 
     Category save(Category category);
 

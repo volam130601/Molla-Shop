@@ -9,6 +9,8 @@ public interface BrandService {
 
     Brand findByCode(String code);
 
+    Brand findById(Long brandId);
+
     Brand save(Brand brand);
 
     void deleteById(Long brandId);

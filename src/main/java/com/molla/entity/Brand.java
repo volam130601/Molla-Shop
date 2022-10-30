@@ -17,6 +17,7 @@ public class Brand {
     @Column(unique = true)
     private String code;
     private String name;
+//    private String logo;
 
     @OneToMany(mappedBy = "brand")
     @EqualsAndHashCode.Exclude

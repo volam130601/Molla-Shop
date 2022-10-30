@@ -15,19 +15,12 @@ public class HomeController {
 
     public void common(Model model) {
         authenticationUser.filterUser(model);
-        model.addAttribute("username", "username");
     }
 
     @GetMapping("")
     public String viewAdminPage(Model model) {
         common(model);
         return "admin/index";
-    }
-
-    @GetMapping("/product")
-    public String viewProductPage(Model model) {
-        common(model);
-        return "admin/product";
     }
 
 }

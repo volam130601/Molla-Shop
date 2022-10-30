@@ -22,15 +22,4 @@ public class Category {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Product> products;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Category category;
-
-    @OneToMany(mappedBy = "category")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private List<Category> categoryList;
 }

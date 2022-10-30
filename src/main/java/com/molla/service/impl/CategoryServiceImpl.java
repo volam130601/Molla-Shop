@@ -24,6 +24,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category findById(Long categoryId) {
+        return categoryRepository.findById(categoryId).get();
+    }
+
+    @Override
     public Category save(Category category) {
         return categoryRepository.save(category);
     }
@@ -33,8 +38,4 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.deleteById(categoryId);
     }
 
-    @Override
-    public List<Category> findCategoriesByCategory_Id(Long categoryId) {
-        return categoryRepository.findCategoriesByCategory_Id(categoryId);
-    }
 }

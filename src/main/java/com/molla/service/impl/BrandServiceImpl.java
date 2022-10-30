@@ -3,14 +3,14 @@ package com.molla.service.impl;
 import com.molla.entity.Brand;
 import com.molla.repository.BrandRepository;
 import com.molla.service.BrandService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class BrandServiceImpl implements BrandService {
+    @Autowired
     private BrandRepository brandRepository;
 
     @Override
@@ -21,6 +21,11 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public Brand findByCode(String code) {
         return brandRepository.findByCode(code);
+    }
+
+    @Override
+    public Brand findById(Long brandId) {
+        return brandRepository.findById(brandId).get();
     }
 
     @Override

@@ -17,61 +17,67 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String shortDescription;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String fullDescription;
     @Column(nullable = false)
-    private String description;
+    private double price;
     @Column(nullable = false)
-    private Double price;
+    private int quantity;
     @Column(nullable = false)
-    private Double discount;
-    @Column(nullable = false)
-    private Integer quantity;
+    private double discount;
 
-    @Column(length = 100)
-    private String sku;
+    private String mainImage;
+    private String extraImage1;
+    private String extraImage2;
+    private String extraImage3;
 
+    private boolean enabled;
+    private boolean inStock;
     @CreatedDate
     private Date createAt;
     private Date updateAt;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @Transient
+    private Long brandId;
+    @Transient
+    private Long categoryId;
+    @ManyToOne
     @JoinColumn(name = "brand_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Brand brand;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Category category;
-
     @OneToMany(mappedBy = "product")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<ProductReview> productReviews;
-
     @OneToMany(mappedBy = "product")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<OrderItem> orderItems;
-
     @OneToMany(mappedBy = "product")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<CartItem> cartItems;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private User user;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @JoinTable(name = "product_image",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "p_image_id"))
-    private List<ProductImage> productImages;
+
+    @Transient
+    public String getMainImagePath() {
+        if (id == null || mainImage == null) return null;
+        return "/product-images/" + id + "/" + mainImage;
+    }
+
 }

@@ -3,8 +3,6 @@ package com.molla.config;
 import com.molla.dto.AuthenticationProvider;
 import com.molla.entity.Role;
 import com.molla.entity.User;
-import com.molla.service.BrandService;
-import com.molla.service.CategoryService;
 import com.molla.service.RoleService;
 import com.molla.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +21,6 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     private UserService userService;
     @Autowired
     private RoleService roleService;
-
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private BrandService brandService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -66,7 +59,6 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         }
 
         //Khoi tao category, brand auto
-//        if (categoryService.findAll() == null) {
-//        }
+
     }
 }

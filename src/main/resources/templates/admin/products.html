@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es"
+      th:replace="~{layouts/admin/main-layout :: main-fragment(
+                                                ~{:: #index-static-resources},
+                                                ~{:: #index-header-main-nav},
+                                                ~{:: #index-main-content},
+                                                ~{:: #index-js-resources}
+                                               )}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>SB Admin Molla Store - Product</title>
+</head>
+
+<body id="page-top">
+<div id="index-main-content">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Product Database</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex">
+            <!--                <h6 class="m-0 font-weight-bold text-primary mr-auto">Product Database</h6>-->
+            <a class="btn btn-outline-success" th:href="@{/admin/product/addOrEdit}">Add</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table cellspacing="0" class="table table-bordered" id="productTable" width="100%">
+                    <thead>
+                    <tr>
+                        <th>ProductID</th>
+                        <th>Main Image</th>
+                        <th>Product Name</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Enable</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${products}">
+                        <td th:utext="${item.id}"></td>
+                        <td>
+                            <img alt="" style="width: 150px;" th:src="@{${item.mainImagePath}}">
+                        </td>
+                        <td th:utext="${item.name}"></td>
+                        <td th:utext="${item.brand.name}"></td>
+                        <td th:utext="${item.category.name}"></td>
+                        <td>
+                            <button class="btn btn-success" th:if="${item.enabled == true}">Enabled</button>
+                            <button class="btn btn-danger" th:unless="${item.enabled == true}">Not Enabled
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-success" th:if="${item.inStock == true}">In stock</button>
+                            <button class="btn btn-success" th:unless="${item.inStock == true}">Out of stock</button>
+                        </td>
+                        <td>
+                            <a href=""><i class="fa-solid fa-circle-info"></i></a>
+                            <a th:href="@{/admin/product/addOrEdit}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a th:href="@{/admin/product/delete/{id}(id=${item})}"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

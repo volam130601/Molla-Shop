@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es"
+      th:replace="~{layouts/admin/main-layout :: main-fragment(
+                                                ~{:: #index-static-resources},
+                                                ~{:: #index-header-main-nav},
+                                                ~{:: #index-main-content},
+                                                ~{:: #index-js-resources}
+                                               )}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SB Admin Molla Store - Product</title>
+</head>
+<body id="page-top">
+<div id="index-main-content">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-4 text-gray-800">Create New Product</h1>
+
+
+        <form enctype="multipart/form-data" method="post"
+              th:action="@{/admin/product/save}"
+              th:object="${product}"
+        >
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#overview">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#description">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#images">Images</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="container tab-pane active" id="overview"><br>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input aria-describedby="helpProductName" class="form-control" id="productName"
+                                   name="productName"
+                                   placeholder="Enter product name" th:field="*{name}"
+                                   type="text">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="brand">Brand</label>
+                                    <select class="form-control" id="brand" name="brand"
+                                            th:field="*{brandId}">
+                                        <option th:each="item,index : ${brands}" th:if="${index == 0 } ? 'checked'"
+                                                th:utext="${item.name}" th:value="${item.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <select class="form-control" id="category" name="category"
+                                            th:field="*{categoryId}">
+                                        <option th:each="item,index : ${categories}" th:if="${index == 0 } ? 'checked'"
+                                                th:utext="${item.name}" th:value="${item.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="price">Price</label>
+                                    <input aria-describedby="priceId" class="form-control" id="price"
+                                           min="0" name="price"
+                                           placeholder="Enter price" th:field="*{price}"
+                                           type="number"
+                                           value="0">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input class="form-control" id="quantity" min="0" name="quantity"
+                                           placeholder="Enter quantity"
+                                           th:field="*{quantity}" type="number"
+                                           value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="discount">Discount</label>
+                                    <input aria-describedby="discountId" class="form-control" id="discount"
+                                           min="0" name="discount"
+                                           placeholder="Enter discount" th:field="*{discount}"
+                                           type="number"
+                                           value="0">
+                                </div>
+                            </div>
+                            <div class="col-lg-auto mt-4">
+                                <div class="form-group">
+                                    <label for="enabled">Enabled</label>
+                                    <input aria-describedby="discountId" class="" id="enabled" min="0"
+                                           name="enabled"
+                                           placeholder="Enter discount" th:field="*{enabled}"
+                                           type="checkbox"
+                                           value="0">
+                                </div>
+                            </div>
+                            <div class="col-lg-auto mt-4">
+                                <div class="form-group">
+                                    <label for="in_stock">In stock</label>
+                                    <input aria-describedby="discountId" class="" id="in_stock" min="0"
+                                           name="in_stock"
+                                           placeholder="Enter discount" th:field="*{inStock}"
+                                           type="checkbox"
+                                           value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container tab-pane fade" id="description"><br>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label for="short_description">Short Description</label>
+                            <textarea class="form-control" id="short_description" name="short_description"
+                                      rows="3" th:field="*{shortDescription}"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="full_description">Full Description</label>
+                            <textarea class="form-control" id="full_description" name="full_description"
+                                      rows="3" th:field="*{fullDescription}"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="container tab-pane fade" id="images"><br>
+                    <div class="row">
+                        <div class="col border m-3">
+                            <div class="form-group">
+                                <img alt="Image preview" class="mb-2" id="thumbnail" src=""
+                                     style="max-width: 100%; ;"><br>
+                                <label for="main_image">Main Image:</label>
+                                <input aria-describedby="fileHelpId" class="form-control-file"
+                                       id="main_image"
+                                       name="main_image" placeholder=""
+                                       type="file">
+                            </div>
+                        </div>
+                        <div class="col border m-3">
+                            <div class="form-group">
+                                <img alt="Image preview" class="mb-2" id="thumbnail0" src=""
+                                     style="max-width: 100%;"><br>
+                                <label for="extra_image1">Extra Image #1</label>
+                                <input aria-describedby="fileHelpId" class="form-control-file"
+                                       id="extra_image1"
+                                       name="extraImage" placeholder=""
+                                       type="file">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col border m-3">
+                            <div class="form-group">
+                                <img alt="Image preview" class="mb-2" id="thumbnail1" src=""
+                                     style="max-width: 100%;"><br>
+                                <label for="extra_image2">Extra Image #2</label>
+                                <input aria-describedby="fileHelpId" class="form-control-file"
+                                       id="extra_image2"
+                                       name="extraImage" placeholder=""
+                                       type="file">
+                            </div>
+                        </div>
+                        <div class="col border m-3">
+                            <div class="form-group">
+                                <img alt="Image preview" class="mb-2" id="thumbnail2" src=""
+                                     style="max-width: 100%;"><br>
+                                <label for="extra_image3">Extra Image #3</label>
+                                <input aria-describedby="fileHelpId" class="form-control-file"
+                                       id="extra_image3"
+                                       name="extraImage" placeholder=""
+                                       type="file">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col ml-4 mt-4">
+                    <button class="btn btn-info" type="submit">Save</button>
+                    <button class="btn btn-primary" type="submit">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<script>
+
+</script>
+</body>
+
+</html>
