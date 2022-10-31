@@ -46,6 +46,8 @@ public class Product {
     private Long brandId;
     @Transient
     private Long categoryId;
+    @Transient
+    private Long productId;
     @ManyToOne
     @JoinColumn(name = "brand_id")
     @EqualsAndHashCode.Exclude
@@ -80,4 +82,21 @@ public class Product {
         return "/product-images/" + id + "/" + mainImage;
     }
 
+    @Transient
+    public String getExtraImage1Path() {
+        if (id == null || extraImage1 == null) return null;
+        return "/product-images/" + id + "/" + extraImage1;
+    }
+
+    @Transient
+    public String getExtraImage2Path() {
+        if (id == null || extraImage2 == null) return null;
+        return "/product-images/" + id + "/" + extraImage2;
+    }
+
+    @Transient
+    public String getExtraImage3Path() {
+        if (id == null || extraImage3 == null) return null;
+        return "/product-images/" + id + "/" + extraImage3;
+    }
 }

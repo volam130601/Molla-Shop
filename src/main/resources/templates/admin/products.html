@@ -42,24 +42,33 @@
                     <tr th:each="item : ${products}">
                         <td th:utext="${item.id}"></td>
                         <td>
-                            <img alt="" style="width: 150px;" th:src="@{${item.mainImagePath}}">
+                            <img alt="" style="width: 100px;" th:src="@{${item.mainImagePath}}">
                         </td>
                         <td th:utext="${item.name}"></td>
                         <td th:utext="${item.brand.name}"></td>
                         <td th:utext="${item.category.name}"></td>
                         <td>
-                            <button class="btn btn-success" th:if="${item.enabled == true}">Enabled</button>
-                            <button class="btn btn-danger" th:unless="${item.enabled == true}">Not Enabled
+                            <button class="btn btn-success p-1" style="font-size: 0.8rem;"
+                                    th:if="${item.enabled == true}">
+                                Enabled
+                            </button>
+                            <button class="btn btn-danger p-1" style="font-size: 0.8rem;"
+                                    th:unless="${item.enabled == true}">Not Enabled
                             </button>
                         </td>
                         <td>
-                            <button class="btn btn-success" th:if="${item.inStock == true}">In stock</button>
-                            <button class="btn btn-success" th:unless="${item.inStock == true}">Out of stock</button>
+                            <button class="btn btn-success p-1" style="font-size: 0.8rem;"
+                                    th:if="${item.inStock == true}">In stock
+                            </button>
+                            <button class="btn btn-success p-1" style="font-size: 0.8rem;"
+                                    th:unless="${item.inStock == true}">Out of stock
+                            </button>
                         </td>
                         <td>
                             <a href=""><i class="fa-solid fa-circle-info"></i></a>
-                            <a th:href="@{/admin/product/addOrEdit}"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a th:href="@{/admin/product/delete/{id}(id=${item})}"><i class="fa-solid fa-trash"></i></a>
+                            <a th:href="@{/admin/product/addOrEdit(id=${item.id})}"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                            <a th:href="@{/admin/product/delete/{id}(id=${item.id})}"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                     </tbody>

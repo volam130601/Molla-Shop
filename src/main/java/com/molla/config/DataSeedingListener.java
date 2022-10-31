@@ -1,8 +1,12 @@
 package com.molla.config;
 
 import com.molla.dto.AuthenticationProvider;
+import com.molla.entity.Brand;
+import com.molla.entity.Category;
 import com.molla.entity.Role;
 import com.molla.entity.User;
+import com.molla.service.BrandService;
+import com.molla.service.CategoryService;
 import com.molla.service.RoleService;
 import com.molla.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,12 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     private UserService userService;
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private BrandService brandService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -59,6 +69,19 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         }
 
         //Khoi tao category, brand auto
-
+        if (categoryService.findByCode("PHONE") == null) {
+            categoryService.save(Category.builder().code("PHONE").name("Smart Phone").build());
+            categoryService.save(Category.builder().code("TV").name("Televisions").build());
+            categoryService.save(Category.builder().code("LAPTOP").name("Laptops").build());
+            categoryService.save(Category.builder().code("MONITOR").name("Monitors").build());
+            categoryService.save(Category.builder().code("IPAD").name("IPad & Tablets").build());
+        }
+        if (brandService.findByCode("APPlE") == null) {
+            brandService.save(Brand.builder().code("APPLE").name("Apple").build());
+            brandService.save(Brand.builder().code("SAMSUNG").name("Samsung").build());
+            brandService.save(Brand.builder().code("PANASONIC").name("Panasonic").build());
+            brandService.save(Brand.builder().code("OPPO").name("Oppo").build());
+            brandService.save(Brand.builder().code("DELL").name("Dell").build());
+        }
     }
 }
